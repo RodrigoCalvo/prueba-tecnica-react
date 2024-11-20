@@ -24,7 +24,7 @@ app.get('/', (req: Request, res: Response) => {
             <h1>Bienvenido a la API</h1>
             <p>Los endpoints disponibles son:</p>
             <ul style="list-style: none; padding: 0;">
-                <li><a href="/marvel/characters/0">/marvel/characters/:page</a> - Lista de personajes paginada (tamaño de página 20)</li>
+                <li><a href="/marvel/characters/0">/marvel/characters/:page</a> - Lista de personajes paginada</li>
                 <li><a href="/marvel/character/1011334">/marvel/character/:id</a> - Detalle del personaje con la id enviada</li>
                 <li><a href="/users">/users</a> - Administra usuarios</li>
             </ul>

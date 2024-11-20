@@ -3,6 +3,7 @@ import { fetchCharacters } from '../db/characters-db';
 import {
   MARVEL_CHARACTER_PROFILE_ENDPOINT,
   MARVEL_CHARACTERS_LIST_ENDPOINT,
+  PAGE_SIZE,
 } from '../config/apiConfig';
 
 export class CharactersController {
@@ -15,7 +16,7 @@ export class CharactersController {
       const { page } = req.params;
 
       const result = await fetchCharacters(MARVEL_CHARACTERS_LIST_ENDPOINT, {
-        ...(Number(page) ? { offset: Number(page) * 20 } : {}),
+        ...(Number(page) ? { offset: Number(page) * PAGE_SIZE } : {}),
       });
 
       if (!result) throw new Error('Not data');
