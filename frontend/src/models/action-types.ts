@@ -1,0 +1,10 @@
+export enum AppActionTypes {
+  UPDATE_LOGIN = 'UPDATE_LOGIN',
+  SET_LOADING = 'SET_LOADING',
+  SET_ERROR = 'SET_ERROR',
+}
+
+export enum CharactersActionTypes {
+  SET_CHARACTERS_LIST = 'SET_CHARACTERS_LIST',
+  SET_SELECTED_CHARACTER = 'SET_SELECTED_CHARACTER',
+}
