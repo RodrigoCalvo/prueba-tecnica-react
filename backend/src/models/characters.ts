@@ -1,5 +1,5 @@
 export type CharactersListVM = {
-  attributionHTML: string;
+  attributionText: string;
   data: Array<CharacterVM>;
   pagination: {
     elements: number;

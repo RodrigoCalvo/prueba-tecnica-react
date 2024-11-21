@@ -5,7 +5,7 @@ import { MarvelServiceCharactersListVM } from '../models/marvel-service';
 export const charactersParser = (
   serviceData: MarvelServiceCharactersListVM
 ): CharactersListVM => ({
-  attributionHTML: serviceData['attributionHTML'],
+  attributionText: serviceData['attributionText'],
   data: serviceData['data']?.['results']?.map((serviceChar) => ({
     id: serviceChar['id'],
     name: serviceChar['name'],
