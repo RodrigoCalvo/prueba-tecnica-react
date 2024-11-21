@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useController } from "../controller/useController";
+import { useController } from "../../controller/useController";
 import "./list-navigation.css";
 
 export const ListNavigation = () => {

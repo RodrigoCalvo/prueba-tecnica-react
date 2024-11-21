@@ -1,4 +1,4 @@
-import { useController } from "../controller/useController";
+import { useController } from "../../controller/useController";
 import "./header.css";
 
 export const Header = () => {

@@ -1,5 +1,5 @@
-import { useController } from "../controller/useController";
-import { CharactersListItem } from "./characters-list-item";
+import { useController } from "../../controller/useController";
+import { CharactersListItem } from "../characters-list-item/characters-list-item";
 import "./characters-list.css";
 
 export const CharactersList = () => {

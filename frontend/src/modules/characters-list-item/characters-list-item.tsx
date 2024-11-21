@@ -1,4 +1,4 @@
-import { CharacterVM } from "../models/characters";
+import { CharacterVM } from "../../models/characters";
 import "./characters-list-item.css";
 
 export const CharactersListItem = ({

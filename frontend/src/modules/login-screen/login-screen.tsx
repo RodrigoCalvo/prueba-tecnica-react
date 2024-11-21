@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import { useController } from "../controller/useController";
+import { useController } from "../../controller/useController";
 import "./login-screen.css";
 
 function LoginScreen() {
