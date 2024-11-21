@@ -26,6 +26,7 @@ export const useController = () => {
 
   const logout = useCallback(() => {
     dispatch(setLoginData({ logged: false, user: '' }));
+    dispatch(setSelectedPageRdx(0));
   }, [dispatch]);
 
   const loadCharactersList = useCallback(
