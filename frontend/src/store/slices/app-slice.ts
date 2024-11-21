@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppStatusInitialStateVM } from '../../models/initial-state';
 
 const initialState: AppStatusInitialStateVM = {
-  login: {
+  loginState: {
     logged: false,
     user: '',
   },
@@ -16,9 +16,9 @@ export const appSlice = createSlice({
   reducers: {
     setLoginData: (
       state,
-      { payload }: PayloadAction<AppStatusInitialStateVM['login']>
+      { payload }: PayloadAction<AppStatusInitialStateVM['loginState']>
     ) => {
-      state.login = payload;
+      state.loginState = payload;
     },
     setLoading: (
       state,

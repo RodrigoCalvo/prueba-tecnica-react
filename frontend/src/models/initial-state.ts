@@ -1,7 +1,7 @@
 import { CharactersListVM, CharacterVM } from './characters';
 
 export type AppStatusInitialStateVM = {
-  login: {
+  loginState: {
     logged: boolean;
     user: string;
   };

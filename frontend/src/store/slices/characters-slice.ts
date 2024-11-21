@@ -3,7 +3,7 @@ import { CharactersInitalStateVM } from '../../models/initial-state';
 
 const initialState: CharactersInitalStateVM = {
   charactersList: {
-    attributionHTML: '',
+    attributionText: '',
     data: [],
     pagination: {
       elements: 0,
