@@ -4,6 +4,7 @@
 }
 
 .character-list-item__link {
+  cursor: pointer;
   display: flex;
   align-items: center;
   text-decoration: none;

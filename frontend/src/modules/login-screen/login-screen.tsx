@@ -1,9 +1,11 @@
 import { SyntheticEvent, useState } from "react";
 import { useController } from "../../controller/useController";
 import "./login-screen.css";
+import { useNavigate } from "react-router-dom";
 
-function LoginScreen() {
+export const LoginScreen = () => {
   const { login } = useController();
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("Paso abierto para pruebas"); // Pruebas
 
   const handleInput = (event: SyntheticEvent<HTMLInputElement>) => {
@@ -11,7 +13,10 @@ function LoginScreen() {
     setUserName(evTarget.value);
   };
   const handleLoginClick = () => {
-    !!userName && login(userName.trim());
+    if (!!userName) {
+      login(userName.trim());
+      navigate("/home");
+    }
   };
   const handleInputKey = (event: SyntheticEvent<HTMLInputElement>) => {
     if ((event as any).key === "Enter") handleLoginClick();
@@ -36,6 +41,4 @@ function LoginScreen() {
       </button>
     </div>
   );
-}
-
-export default LoginScreen;
+};
