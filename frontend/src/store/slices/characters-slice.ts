@@ -46,6 +46,7 @@ export const charactersSlice = createSlice({
   },
 });
 
-export const { setCharactersList } = charactersSlice.actions;
+export const { setCharactersList, setSelectedCharacter } =
+  charactersSlice.actions;
 
 export default charactersSlice.reducer;

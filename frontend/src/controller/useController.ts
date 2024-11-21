@@ -8,7 +8,11 @@ import {
   setSelectedPage as setSelectedPageRdx,
 } from '../store/slices/app-slice';
 import { getCharactersList } from '../api/characters';
-import { setCharactersList } from '../store/slices/characters-slice';
+import {
+  setCharactersList,
+  setSelectedCharacter as setSelectedCharacterRdx,
+} from '../store/slices/characters-slice';
+import { CharacterVM } from '../models/characters';
 
 export const useController = () => {
   const dispatch = useDispatch();
@@ -44,6 +48,13 @@ export const useController = () => {
     [dispatch]
   );
 
+  const setSelectedCharacter = useCallback(
+    (character: CharacterVM) => {
+      dispatch(setSelectedCharacterRdx(character));
+    },
+    [dispatch]
+  );
+
   const setSelectedPage = useCallback(
     (page: number) => {
       dispatch(setSelectedPageRdx(page));
@@ -58,5 +69,6 @@ export const useController = () => {
     logout,
     loadCharactersList,
     setSelectedPage,
+    setSelectedCharacter,
   };
 };
