@@ -1,15 +1,15 @@
 import { useController } from "../controller/useController";
+import { CharactersListItem } from "./characters-list-item";
+import "./characters-list.css";
 
 export const CharactersList = () => {
   const { charactersList } = useController();
 
   return (
-    <ul className="characters-list">
+    <ol className="characters-list">
       {charactersList?.data?.map((character) => (
-        <li className="characters-list__item" key={character.id}>
-          {character.name} - {character.comics.count.total} comics
-        </li>
+        <CharactersListItem key={character.id} character={character} />
       ))}
-    </ul>
+    </ol>
   );
 };
