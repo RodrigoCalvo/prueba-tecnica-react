@@ -1,0 +1,81 @@
+.character-detail {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #101010;
+  color: white;
+  border: 2px solid #ff1e1e;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  font-family: "Roboto", sans-serif;
+}
+
+.character-detail__header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.character-detail__image-container {
+  display: inline-block;
+  border: 3px solid #c1a000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.character-detail__image {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 8px;
+}
+
+.character-detail__name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff1e1e;
+  margin: 20px 0 10px;
+}
+
+.character-detail__info {
+  padding: 10px;
+}
+
+.character-detail__subtitle,
+.character-detail__list-title {
+  font-size: 1.5rem;
+  margin: 20px 0 10px;
+  color: #f2f2f2;
+  text-transform: uppercase;
+}
+
+.character-detail__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.character-detail__comics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.character-detail__comic-item {
+  background-color: #1c1c1c;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 6px;
+  color: #f2f2f2;
+  transition: background-color 0.3s ease;
+}
+
+.character-detail__comic-item:hover {
+  background-color: #ff1e1e;
+  color: white;
+}
+
+.character-detail__error-message {
+  font-size: 1.2rem;
+  color: #ff1e1e;
+  text-align: center;
+  margin: 20px 0;
+}
