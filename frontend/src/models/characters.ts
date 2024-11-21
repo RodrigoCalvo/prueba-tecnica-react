@@ -15,5 +15,6 @@ export type CharactersListVM = {
   pagination: {
     elements: number;
     page: number;
+    totalPages: number;
   };
 };

@@ -8,6 +8,7 @@ const initialState: CharactersInitalStateVM = {
     pagination: {
       elements: 0,
       page: 0,
+      totalPages: 0,
     },
   },
   selectedCharacter: {
