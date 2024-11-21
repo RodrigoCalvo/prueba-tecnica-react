@@ -8,10 +8,10 @@ import { ListNavigation } from "./modules/list-navigation";
 import { Footer } from "./modules/footer";
 
 function App() {
-  const { loginState, loadCharactersList } = useController();
+  const { loginState, loadCharactersList, selectedPage } = useController();
   useEffect(() => {
-    loadCharactersList();
-  }, [loadCharactersList]);
+    loadCharactersList(selectedPage);
+  }, [loadCharactersList, selectedPage]);
 
   return (
     <div className="App">
