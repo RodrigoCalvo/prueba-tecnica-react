@@ -1,0 +1,67 @@
+.character-list-item {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.character-list-item__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 10px;
+  background-color: #202020;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.character-list-item__link:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(255, 30, 30, 0.5);
+}
+
+.character-list-item__thumbnail-container {
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.character-list-item__thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ff1e1e;
+}
+
+.character-list-item__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.character-list-item__name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff1e1e;
+  margin-bottom: 5px;
+}
+
+.character-list-item__comics-count {
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+@media (max-width: 600px) {
+  .character-list-item__thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .character-list-item__name {
+    font-size: 16px;
+  }
+
+  .character-list-item__comics-count {
+    font-size: 12px;
+  }
+}

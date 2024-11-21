@@ -1,0 +1,108 @@
+.list-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  background-color: #202020;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.list-navigation__container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.list-navigation__item button {
+  background: none;
+  border: 2px solid transparent;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.list-navigation__item button:hover {
+  color: #ff1e1e;
+  border-color: #ff1e1e;
+  text-decoration: none;
+}
+
+.list-navigation__item--active {
+  display: flex;
+}
+
+.list-navigation__item--active button {
+  background-color: #ff1e1e;
+  color: #ffffff;
+  font-weight: bold;
+  border: 2px solid #ff1e1e;
+  border-radius: 5px;
+  cursor: default;
+}
+
+.list-navigation__item--no-click {
+  color: #aaaaaa;
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+.list-navigation__item--select {
+  margin: 0 10px;
+}
+
+.list-navigation__page-select {
+  background-color: #202020;
+  color: #ffffff;
+  border: 1px solid #333333;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 120px;
+  outline: none;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.list-navigation__page-select:hover,
+.list-navigation__page-select:focus {
+  border-color: #ff1e1e;
+}
+
+.list-navigation__page-select::after {
+  content: " ⌄";
+  font-size: 18px;
+  color: #ffffff;
+  margin-left: 8px;
+}
+
+.list-navigation__page-select:focus {
+  box-shadow: 0 0 3px rgba(255, 30, 30, 0.5);
+}
+
+@media (max-width: 600px) {
+  .list-navigation {
+    padding: 10px;
+  }
+
+  .list-navigation__item button {
+    font-size: 14px;
+    padding: 3px 7px;
+  }
+
+  .list-navigation__container {
+    gap: 5px;
+  }
+}
