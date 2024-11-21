@@ -1,7 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { useCallback } from 'react';
-import { setError, setLoading, setLoginData } from '../store/slices/app-slice';
+import {
+  setError,
+  setLoading,
+  setLoginData,
+  setSelectedPage as setSelectedPageRdx,
+} from '../store/slices/app-slice';
 import { getCharactersList } from '../api/characters';
 import { setCharactersList } from '../store/slices/characters-slice';
 
@@ -23,17 +28,27 @@ export const useController = () => {
     dispatch(setLoginData({ logged: false, user: '' }));
   }, [dispatch]);
 
-  const loadCharactersList = useCallback(async () => {
-    try {
-      dispatch(setLoading(true));
-      const charactersList = await getCharactersList(0);
-      dispatch(setCharactersList(charactersList));
-    } catch (error: any) {
-      dispatch(setError(error.message));
-    } finally {
-      dispatch(setLoading(false));
-    }
-  }, [dispatch]);
+  const loadCharactersList = useCallback(
+    async (page: number) => {
+      try {
+        dispatch(setLoading(true));
+        const charactersList = await getCharactersList(page);
+        dispatch(setCharactersList(charactersList));
+      } catch (error: any) {
+        dispatch(setError(error.message));
+      } finally {
+        dispatch(setLoading(false));
+      }
+    },
+    [dispatch]
+  );
+
+  const setSelectedPage = useCallback(
+    (page: number) => {
+      dispatch(setSelectedPageRdx(page));
+    },
+    [dispatch]
+  );
 
   return {
     ...charactersState,
@@ -41,5 +56,6 @@ export const useController = () => {
     login,
     logout,
     loadCharactersList,
+    setSelectedPage,
   };
 };

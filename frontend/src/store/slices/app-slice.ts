@@ -6,6 +6,7 @@ const initialState: AppStatusInitialStateVM = {
     logged: false,
     user: '',
   },
+  selectedPage: 0,
   isLoading: false,
   error: '',
 };
@@ -19,6 +20,12 @@ export const appSlice = createSlice({
       { payload }: PayloadAction<AppStatusInitialStateVM['loginState']>
     ) => {
       state.loginState = payload;
+    },
+    setSelectedPage: (
+      state,
+      { payload }: PayloadAction<AppStatusInitialStateVM['selectedPage']>
+    ) => {
+      state.selectedPage = payload;
     },
     setLoading: (
       state,
@@ -35,6 +42,7 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setLoginData, setLoading, setError } = appSlice.actions;
+export const { setLoginData, setSelectedPage, setLoading, setError } =
+  appSlice.actions;
 
 export default appSlice.reducer;

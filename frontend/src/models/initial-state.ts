@@ -5,6 +5,7 @@ export type AppStatusInitialStateVM = {
     logged: boolean;
     user: string;
   };
+  selectedPage: number;
   isLoading: boolean;
   error: string;
 };
