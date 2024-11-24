@@ -29,7 +29,6 @@ export class UsersController {
       const { name } = req.params;
       const result = searchUser(name);
 
-      if (!result) throw new Error('Not data');
       resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
