@@ -23,6 +23,8 @@ const initialState: CharactersInitalStateVM = {
       },
       titles: [],
     },
+    comments: [],
+    ratings: [],
   },
 };
 
