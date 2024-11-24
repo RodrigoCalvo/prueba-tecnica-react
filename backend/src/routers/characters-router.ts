@@ -2,11 +2,30 @@ import { Router } from 'express';
 import { CharactersController } from '../controllers/characters-controller';
 
 export const charactersRouter = Router();
+export const characterRouter = Router();
 
-export const charactersController = new CharactersController();
+const charactersController = new CharactersController();
 
-charactersRouter.get(
-  '/characters/:page',
-  charactersController.getAllController
+charactersRouter.get('/:page', charactersController.getAllCharactersController);
+
+characterRouter.get('/:id', charactersController.getCharacterController);
+characterRouter.get(
+  '/comics/:id',
+  charactersController.getCharacterComicsController
 );
-charactersRouter.get('/character/:id', charactersController.getController);
+characterRouter.post(
+  '/comments',
+  charactersController.postCharacterCommentController
+);
+characterRouter.post(
+  '/ratings',
+  charactersController.postCharacterRatingController
+);
+characterRouter.patch(
+  '/ratings',
+  charactersController.patchCharacterRatingController
+);
+characterRouter.delete(
+  '/comments',
+  charactersController.deleteCharacterCommentController
+);
