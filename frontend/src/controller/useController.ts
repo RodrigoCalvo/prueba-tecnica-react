@@ -13,6 +13,7 @@ import {
   setSelectedCharacter as setSelectedCharacterRdx,
 } from '../store/slices/characters-slice';
 import { CharacterVM } from '../models/characters';
+import { createUser, getUser } from '../api/users';
 
 export const useController = () => {
   const dispatch = useDispatch();
@@ -22,14 +23,16 @@ export const useController = () => {
   const appState = useSelector((state: RootState) => state.AppReducer);
 
   const login = useCallback(
-    (user: string) => {
-      dispatch(setLoginData({ logged: true, user }));
+    async (userName: string) => {
+      let userData = await getUser(userName);
+      if (!userData) userData = await createUser(userName);
+      dispatch(setLoginData({ logged: true, user: userData }));
     },
     [dispatch]
   );
 
   const logout = useCallback(() => {
-    dispatch(setLoginData({ logged: false, user: '' }));
+    dispatch(setLoginData({ logged: false, user: null }));
     dispatch(setSelectedPageRdx(0));
   }, [dispatch]);
 
