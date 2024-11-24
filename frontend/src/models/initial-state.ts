@@ -1,9 +1,10 @@
 import { CharactersListVM, CharacterVM } from './characters';
+import { User } from './users';
 
 export type AppStatusInitialStateVM = {
   loginState: {
     logged: boolean;
-    user: string;
+    user: User | null;
   };
   selectedPage: number;
   isLoading: boolean;

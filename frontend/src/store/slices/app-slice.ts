@@ -4,7 +4,7 @@ import { AppStatusInitialStateVM } from '../../models/initial-state';
 const initialState: AppStatusInitialStateVM = {
   loginState: {
     logged: false,
-    user: '',
+    user: null,
   },
   selectedPage: 0,
   isLoading: false,

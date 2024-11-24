@@ -7,7 +7,7 @@ import {
 } from '../config/apiConfig';
 import { User } from '../models/users';
 
-export const getUser = async (userName: string): Promise<User> => {
+export const getUser = async (userName: string): Promise<User | undefined> => {
   const url = `${API_BASE_URL}${USER_PROFILE_ENDPOINT}${userName}`;
   return await fetch(url, { method: USER_PROFILE_ENDPOINT.method }).then(
     (resp) => resp.json()
