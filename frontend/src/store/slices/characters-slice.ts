@@ -51,10 +51,101 @@ export const charactersSlice = createSlice({
     ) => {
       state.selectedCharacter = payload;
     },
+    setSelectedCharacterComics: (
+      state,
+      {
+        payload,
+      }: PayloadAction<CharactersInitalStateVM['selectedCharacterComics']>
+    ) => {
+      state.selectedCharacterComics = payload;
+    },
+
+    addCharacterComment: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        characterId: CharactersInitalStateVM['charactersList']['data'][number]['id'];
+        addedComment: CharactersInitalStateVM['charactersList']['data'][number]['comments'][number];
+      }>
+    ) => {
+      const { characterId, addedComment } = payload;
+      const character = state.charactersList.data.find(
+        (char) => char.id === characterId
+      );
+      if (character) {
+        character.comments?.push(addedComment);
+      }
+    },
+    deleteCharacterComment: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        characterId: CharactersInitalStateVM['charactersList']['data'][number]['id'];
+        commentId: CharactersInitalStateVM['charactersList']['data'][number]['comments'][number]['id'];
+      }>
+    ) => {
+      const { characterId, commentId } = payload;
+      const character = state.charactersList.data.find(
+        (char) => char.id === characterId
+      );
+      if (character) {
+        character.comments = character.comments.filter(
+          (comment) => comment.id !== commentId
+        );
+      }
+    },
+    addCharacterRating: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        characterId: CharactersInitalStateVM['charactersList']['data'][number]['id'];
+        addedRating: CharactersInitalStateVM['charactersList']['data'][number]['ratings'][number];
+      }>
+    ) => {
+      const { characterId, addedRating } = payload;
+      const character = state.charactersList.data.find(
+        (char) => char.id === characterId
+      );
+      if (character) {
+        character.ratings?.push(addedRating);
+      }
+    },
+    changeCharacterRating: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        characterId: CharactersInitalStateVM['charactersList']['data'][number]['id'];
+        changedRating: CharactersInitalStateVM['charactersList']['data'][number]['ratings'][number];
+      }>
+    ) => {
+      const { characterId, changedRating } = payload;
+      const character = state.charactersList.data.find(
+        (char) => char.id === characterId
+      );
+      if (character) {
+        const ratingIndex = character.ratings.findIndex(
+          (rating) => rating.user === changedRating.user
+        );
+        if (ratingIndex !== -1) {
+          character.ratings[ratingIndex] = changedRating;
+        }
+      }
+    },
   },
 });
 
-export const { setCharactersList, setSelectedCharacter } =
-  charactersSlice.actions;
+export const {
+  setCharactersList,
+  setSelectedCharacter,
+  setSelectedCharacterComics,
+  addCharacterComment,
+  deleteCharacterComment,
+  addCharacterRating,
+  changeCharacterRating,
+} = charactersSlice.actions;
 
 export default charactersSlice.reducer;
