@@ -9,10 +9,23 @@ import {
   setLoginData,
   setSelectedPage as setSelectedPageRdx,
 } from '../store/slices/app-slice';
-import { getCharacter, getCharactersList } from '../api/characters';
+import {
+  addComment,
+  addRating,
+  changeRating,
+  deleteComment,
+  getCharacter,
+  getCharacterComics,
+  getCharactersList,
+} from '../api/characters';
 import {
   setCharactersList,
   setSelectedCharacter as setSelectedCharacterRdx,
+  addCharacterComment,
+  deleteCharacterComment,
+  changeCharacterRating,
+  addCharacterRating,
+  setSelectedCharacterComics,
 } from '../store/slices/characters-slice';
 import {
   createUser,
@@ -21,6 +34,7 @@ import {
   getUser,
 } from '../api/users';
 import { User } from '../models/users';
+import { Comment, Rating } from '../models/characters';
 
 export const useController = () => {
   const dispatch = useDispatch();
@@ -80,10 +94,60 @@ export const useController = () => {
     [dispatch]
   );
 
+  const addRatingToCharacter = useCallback(
+    async (characterId: number, rating: Rating) => {
+      addRating(characterId, rating).then((addedRating) => {
+        if (addedRating) {
+          dispatch(addCharacterRating({ characterId, addedRating }));
+        }
+      });
+    },
+    [dispatch]
+  );
+  const changeRatingFromCharacter = useCallback(
+    async (characterId: number, rating: Rating) => {
+      changeRating(characterId, rating).then((changedRating) => {
+        if (changedRating) {
+          dispatch(changeCharacterRating({ characterId, changedRating }));
+        }
+      });
+    },
+    [dispatch]
+  );
+  const addCommentToCharacter = useCallback(
+    async (characterId: number, comment: Comment) => {
+      addComment(characterId, comment).then((addedComment) => {
+        if (addedComment) {
+          dispatch(addCharacterComment({ characterId, addedComment }));
+        }
+      });
+    },
+    [dispatch]
+  );
+  const deleteCommentFromCharacter = useCallback(
+    async (characterId: number, commentId: string) => {
+      deleteComment(characterId, commentId).then((success) => {
+        if (success) {
+          dispatch(deleteCharacterComment({ characterId, commentId }));
+        }
+      });
+    },
+    [dispatch]
+  );
+
   const setSelectedCharacter = useCallback(
     async (characterId: number) => {
-      const data = await getCharacter(Number(characterId));
-      dispatch(setSelectedCharacterRdx(data?.character));
+      try {
+        dispatch(setLoading(true));
+        const data = await getCharacter(Number(characterId));
+        const comics = await getCharacterComics(Number(characterId));
+        dispatch(setSelectedCharacterRdx(data?.character));
+        dispatch(setSelectedCharacterComics(comics));
+      } catch (error: any) {
+        dispatch(setError(error.message));
+      } finally {
+        dispatch(setLoading(false));
+      }
     },
     [dispatch]
   );
@@ -103,6 +167,10 @@ export const useController = () => {
     loadCharactersList,
     likeCharacter,
     unlikeCharacter,
+    addCommentToCharacter,
+    deleteCommentFromCharacter,
+    addRatingToCharacter,
+    changeRatingFromCharacter,
     setSelectedPage,
     setSelectedCharacter,
   };
