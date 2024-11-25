@@ -5,8 +5,6 @@ import "./characters-list.css";
 export const CharactersList = () => {
   const { isLoading, charactersList } = useController();
 
-  console.log(isLoading);
-
   return (
     <>
       {isLoading ? (
