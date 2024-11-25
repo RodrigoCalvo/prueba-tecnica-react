@@ -45,46 +45,40 @@ export const getCharacterComics = async (id: number): Promise<ComicsListVM> => {
 export const addComment = async (
   characterId: number,
   comment: Pick<Comment, 'textContent' | 'user'>
-): Promise<boolean> => {
+): Promise<Comment> => {
   const url = `${API_BASE_URL}${CHARACTER_COMMENT_ADD_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ characterId, comment });
   return await fetch(url, {
     method: CHARACTER_COMMENT_ADD_ENDPOINT.method,
     body,
     headers: JSON_HEADER,
-  })
-    .then((resp) => resp.json() as Promise<{ success: boolean }>)
-    .then((resp) => resp.success);
+  }).then((resp) => resp.json() as Promise<Comment>);
 };
 
 export const addRating = async (
   characterId: number,
   rating: Rating
-): Promise<boolean> => {
+): Promise<Rating> => {
   const url = `${API_BASE_URL}${CHARACTER_RATING_ADD_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ characterId, rating });
   return await fetch(url, {
     method: CHARACTER_RATING_ADD_ENDPOINT.method,
     body,
     headers: JSON_HEADER,
-  })
-    .then((resp) => resp.json() as Promise<{ success: boolean }>)
-    .then((resp) => resp.success);
+  }).then((resp) => resp.json() as Promise<Rating>);
 };
 
 export const changeRating = async (
   characterId: number,
   rating: Rating
-): Promise<boolean> => {
+): Promise<Rating> => {
   const url = `${API_BASE_URL}${CHARACTER_RATING_CHANGE_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ characterId, rating });
   return await fetch(url, {
     method: CHARACTER_RATING_CHANGE_ENDPOINT.method,
     body,
     headers: JSON_HEADER,
-  })
-    .then((resp) => resp.json() as Promise<{ success: boolean }>)
-    .then((resp) => resp.success);
+  }).then((resp) => resp.json() as Promise<Rating>);
 };
 
 export const deleteComment = async (
