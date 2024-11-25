@@ -9,12 +9,11 @@ import {
   setLoginData,
   setSelectedPage as setSelectedPageRdx,
 } from '../store/slices/app-slice';
-import { getCharactersList } from '../api/characters';
+import { getCharacter, getCharactersList } from '../api/characters';
 import {
   setCharactersList,
   setSelectedCharacter as setSelectedCharacterRdx,
 } from '../store/slices/characters-slice';
-import { CharacterVM } from '../models/characters';
 import {
   createUser,
   createUserLike,
@@ -82,8 +81,9 @@ export const useController = () => {
   );
 
   const setSelectedCharacter = useCallback(
-    (character: CharacterVM) => {
-      dispatch(setSelectedCharacterRdx(character));
+    async (characterId: number) => {
+      const data = await getCharacter(Number(characterId));
+      dispatch(setSelectedCharacterRdx(data?.character));
     },
     [dispatch]
   );

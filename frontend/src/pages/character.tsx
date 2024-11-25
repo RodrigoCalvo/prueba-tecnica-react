@@ -4,7 +4,6 @@ import { Footer } from "../modules/footer/footer";
 import { Header } from "../modules/header/header";
 import { useController } from "../controller/useController";
 import { MARVEL_CHAR_ID_LENGHT } from "../config/apiConfig";
-import { getCharacter } from "../api/characters";
 
 export const Character = () => {
   const { selectedCharacter, setSelectedCharacter } = useController();
@@ -20,9 +19,7 @@ export const Character = () => {
     )
       return;
     if (!selectedCharacter.id || Number(characterId) !== selectedCharacter.id) {
-      getCharacter(Number(characterId)).then((data) =>
-        setSelectedCharacter(data?.character)
-      );
+      setSelectedCharacter(Number(characterId));
     }
   }, [selectedCharacter.id, setSelectedCharacter]);
   return (
