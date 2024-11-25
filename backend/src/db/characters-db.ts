@@ -68,7 +68,7 @@ export const saveComment = (characterId: number, comment: Comment) => {
         { id: characterId, comments: [comment], ratings: [] },
       ];
   writeData<Array<CharacterDbVM>>(DATA_FILE, newDbData);
-  return true;
+  return comment;
 };
 
 export const saveRating = (characterId: number, rating: Rating) => {
@@ -84,7 +84,7 @@ export const saveRating = (characterId: number, rating: Rating) => {
       )
     : [...previousDbData, { id: characterId, comments: [], ratings: [rating] }];
   writeData<Array<CharacterDbVM>>(DATA_FILE, newDbData);
-  return true;
+  return rating;
 };
 
 export const modifyRating = (characterId: number, rating: Rating) => {
@@ -92,13 +92,13 @@ export const modifyRating = (characterId: number, rating: Rating) => {
   let previousCharacter = previousDbData.find(
     (char) => char.id === characterId
   );
-  if (!previousCharacter) return false;
+  if (!previousCharacter) return;
   if (
     !previousCharacter.ratings.some(
       (ratingItem) => ratingItem.user === rating.user
     )
   )
-    return false;
+    return;
   const newDbData = previousDbData.map((character) =>
     character.id === characterId
       ? {
@@ -113,7 +113,7 @@ export const modifyRating = (characterId: number, rating: Rating) => {
       : character
   );
   writeData<Array<CharacterDbVM>>(DATA_FILE, newDbData);
-  return true;
+  return rating;
 };
 
 export const deleteComment = (characterId: number, commentId: string) => {

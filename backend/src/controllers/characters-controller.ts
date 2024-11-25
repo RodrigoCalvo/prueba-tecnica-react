@@ -132,12 +132,10 @@ export class CharactersController {
       if (!comment.textContent || !comment.user)
         throw new Error('Wrong request body');
 
-      const result = {
-        success: !!saveComment(characterId, {
-          id: generateCommentId(),
-          ...comment,
-        }),
-      };
+      const result = saveComment(characterId, {
+        id: generateCommentId(),
+        ...comment,
+      });
       resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
@@ -161,7 +159,7 @@ export class CharactersController {
         throw new Error('Wrong id');
       if (!rating.rating || !rating.user) throw new Error('Wrong request body');
 
-      const result = { success: !!saveRating(characterId, rating) };
+      const result = saveRating(characterId, rating);
       resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
@@ -185,7 +183,8 @@ export class CharactersController {
         throw new Error('Wrong id');
       if (!rating.rating || !rating.user) throw new Error('Wrong request body');
 
-      const result = { success: !!modifyRating(characterId, rating) };
+      const result = modifyRating(characterId, rating);
+      if (!result) throw new Error("Rating doesn't exist");
       resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
