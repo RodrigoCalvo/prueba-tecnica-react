@@ -18,7 +18,7 @@ const addUser = (userName: string): User => {
   const newUser: User = {
     id: generateUserId(),
     name: userName,
-    likedChararacters: [],
+    likedCharacters: [],
   };
   const data = readData<Array<User>>(DATA_FILE) || [];
   const newData = [...data, newUser];
@@ -32,16 +32,14 @@ const addUserLiked = (userId: string, characterLikedId: number): boolean => {
 
   if (userIndex === -1) return false;
   if (
-    data[userIndex].likedChararacters.some(
-      (char) => char.id === characterLikedId
-    )
+    data[userIndex].likedCharacters.some((char) => char.id === characterLikedId)
   )
     return true;
 
   const newUser: User = {
     ...data[userIndex],
-    likedChararacters: [
-      ...data[userIndex].likedChararacters,
+    likedCharacters: [
+      ...data[userIndex].likedCharacters,
       { id: characterLikedId },
     ],
   };
@@ -57,7 +55,7 @@ const removeUserLiked = (userId: string, characterLikedId: number): boolean => {
 
   if (userIndex === -1) return false;
   if (
-    !data[userIndex].likedChararacters.some(
+    !data[userIndex].likedCharacters.some(
       (char) => char.id === characterLikedId
     )
   )
@@ -65,7 +63,7 @@ const removeUserLiked = (userId: string, characterLikedId: number): boolean => {
 
   const newUser: User = {
     ...data[userIndex],
-    likedChararacters: data[userIndex].likedChararacters.filter(
+    likedCharacters: data[userIndex].likedCharacters.filter(
       (char) => char.id !== characterLikedId
     ),
   };
