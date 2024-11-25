@@ -30,7 +30,7 @@ export class UsersController {
       const result = searchUser(name);
 
       resp.setHeader('Content-type', 'application/json');
-      resp.end(JSON.stringify(result));
+      resp.end(JSON.stringify(result ? result : {}));
     } catch (error) {
       next(error);
     }
@@ -47,6 +47,7 @@ export class UsersController {
       const existingUser = searchUser(userName);
 
       const result = existingUser ?? addUser(userName);
+      resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
       next(error);
@@ -62,6 +63,7 @@ export class UsersController {
       const { userId, characterId } = req.body;
 
       const result = { success: addUserLiked(userId, characterId) };
+      resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
       next(error);
@@ -77,6 +79,7 @@ export class UsersController {
       const { userId, characterId } = req.body;
 
       const result = { success: removeUserLiked(userId, characterId) };
+      resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
       next(error);
