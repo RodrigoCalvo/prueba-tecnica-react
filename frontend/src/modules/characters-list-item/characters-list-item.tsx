@@ -13,7 +13,7 @@ export const CharactersListItem = ({
     useController();
   const navigate = useNavigate();
 
-  const isFavorite = useMemo(
+  const isLiked = useMemo(
     () =>
       !!loginState.user?.likedCharacters?.find(
         (char) => char.id === character.id
@@ -29,13 +29,13 @@ export const CharactersListItem = ({
   const handleLikeClick = useCallback(
     (ev: SyntheticEvent) => {
       ev.stopPropagation();
-      if (isFavorite) {
+      if (isLiked) {
         unlikeCharacter(loginState.user!.id, character.id);
       } else {
         likeCharacter(loginState.user!.id, character.id);
       }
     },
-    [character, isFavorite, loginState, likeCharacter, unlikeCharacter]
+    [character, isLiked, loginState, likeCharacter, unlikeCharacter]
   );
 
   return (
@@ -59,7 +59,7 @@ export const CharactersListItem = ({
             role="button"
             onClick={handleLikeClick}
             className={`character-list-item__heart ${
-              isFavorite ? "favorite" : ""
+              isLiked ? "favorite" : ""
             }`}
           >
             ♥
