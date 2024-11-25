@@ -1,5 +1,6 @@
 import {
   API_BASE_URL,
+  JSON_HEADER,
   USER_CREATE_USER_ENDPOINT,
   USER_LIKE_ADD_ENDPOINT,
   USER_LIKE_DELETE_ENDPOINT,
@@ -7,19 +8,20 @@ import {
 } from '../config/apiConfig';
 import { User } from '../models/users';
 
-export const getUser = async (userName: string): Promise<User | undefined> => {
-  const url = `${API_BASE_URL}${USER_PROFILE_ENDPOINT}${userName}`;
+export const getUser = async (userName: string): Promise<User | {}> => {
+  const url = `${API_BASE_URL}${USER_PROFILE_ENDPOINT.endpoint}${userName}`;
   return await fetch(url, { method: USER_PROFILE_ENDPOINT.method }).then(
     (resp) => resp.json()
   );
 };
 
 export const createUser = async (userName: string): Promise<User> => {
-  const url = `${API_BASE_URL}${USER_CREATE_USER_ENDPOINT}`;
+  const url = `${API_BASE_URL}${USER_CREATE_USER_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ userName });
   return await fetch(url, {
     method: USER_CREATE_USER_ENDPOINT.method,
     body,
+    headers: JSON_HEADER,
   }).then((resp) => resp.json());
 };
 
@@ -27,9 +29,13 @@ export const createUserLike = async (
   userId: string,
   characterId: number
 ): Promise<boolean> => {
-  const url = `${API_BASE_URL}${USER_LIKE_ADD_ENDPOINT}`;
+  const url = `${API_BASE_URL}${USER_LIKE_ADD_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ userId, characterId });
-  return await fetch(url, { method: USER_LIKE_ADD_ENDPOINT.method, body })
+  return await fetch(url, {
+    method: USER_LIKE_ADD_ENDPOINT.method,
+    body,
+    headers: JSON_HEADER,
+  })
     .then((resp) => resp.json())
     .then((resp: { success: boolean }) => resp.success)
     .catch((error) => {
@@ -42,9 +48,13 @@ export const deleteUserLike = async (
   userId: string,
   characterId: number
 ): Promise<boolean> => {
-  const url = `${API_BASE_URL}${USER_LIKE_DELETE_ENDPOINT}`;
+  const url = `${API_BASE_URL}${USER_LIKE_DELETE_ENDPOINT.endpoint}`;
   const body = JSON.stringify({ userId, characterId });
-  return await fetch(url, { method: USER_LIKE_DELETE_ENDPOINT.method, body })
+  return await fetch(url, {
+    method: USER_LIKE_DELETE_ENDPOINT.method,
+    body,
+    headers: JSON_HEADER,
+  })
     .then((resp) => resp.json())
     .then((resp: { success: boolean }) => resp.success)
     .catch((error) => {
