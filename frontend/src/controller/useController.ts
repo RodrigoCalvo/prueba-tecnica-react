@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { useCallback } from 'react';
 import {
+  addUserLike,
+  removeUserLike,
   setError,
   setLoading,
   setLoginData,
@@ -13,7 +15,13 @@ import {
   setSelectedCharacter as setSelectedCharacterRdx,
 } from '../store/slices/characters-slice';
 import { CharacterVM } from '../models/characters';
-import { createUser, getUser } from '../api/users';
+import {
+  createUser,
+  createUserLike,
+  deleteUserLike,
+  getUser,
+} from '../api/users';
+import { User } from '../models/users';
 
 export const useController = () => {
   const dispatch = useDispatch();
@@ -25,8 +33,8 @@ export const useController = () => {
   const login = useCallback(
     async (userName: string) => {
       let userData = await getUser(userName);
-      if (!userData) userData = await createUser(userName);
-      dispatch(setLoginData({ logged: true, user: userData }));
+      if (!Object.keys(userData).length) userData = await createUser(userName);
+      dispatch(setLoginData({ logged: true, user: userData as User }));
     },
     [dispatch]
   );
@@ -51,6 +59,28 @@ export const useController = () => {
     [dispatch]
   );
 
+  const likeCharacter = useCallback(
+    async (userId: string, characterId: number) => {
+      createUserLike(userId, characterId).then((success) => {
+        if (success) {
+          dispatch(addUserLike({ id: characterId }));
+        }
+      });
+    },
+    [dispatch]
+  );
+
+  const unlikeCharacter = useCallback(
+    async (userId: string, characterId: number) => {
+      deleteUserLike(userId, characterId).then((success) => {
+        if (success) {
+          dispatch(removeUserLike({ id: characterId }));
+        }
+      });
+    },
+    [dispatch]
+  );
+
   const setSelectedCharacter = useCallback(
     (character: CharacterVM) => {
       dispatch(setSelectedCharacterRdx(character));
@@ -71,6 +101,8 @@ export const useController = () => {
     login,
     logout,
     loadCharactersList,
+    likeCharacter,
+    unlikeCharacter,
     setSelectedPage,
     setSelectedCharacter,
   };
