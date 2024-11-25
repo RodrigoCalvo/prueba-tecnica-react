@@ -3,13 +3,23 @@ import { CharactersListItem } from "../characters-list-item/characters-list-item
 import "./characters-list.css";
 
 export const CharactersList = () => {
-  const { charactersList } = useController();
+  const { isLoading, charactersList } = useController();
+
+  console.log(isLoading);
 
   return (
-    <ol className="characters-list">
-      {charactersList?.data?.map((character) => (
-        <CharactersListItem key={character.id} character={character} />
-      ))}
-    </ol>
+    <>
+      {isLoading ? (
+        <div className="spinner-container">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+        <ol className="characters-list">
+          {charactersList?.data?.map((character) => (
+            <CharactersListItem key={character.id} character={character} />
+          ))}
+        </ol>
+      )}
+    </>
   );
 };
