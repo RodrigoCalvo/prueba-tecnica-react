@@ -2,7 +2,7 @@ import { useController } from "../../controller/useController";
 import "./character-detail.css";
 
 export const CharacterDetail = () => {
-  const { selectedCharacter } = useController();
+  const { selectedCharacter, selectedCharacterComics } = useController();
 
   return (
     <>
@@ -26,13 +26,13 @@ export const CharacterDetail = () => {
             </p>
             <h3 className="character-detail__list-title">Listado de cómics:</h3>
             <ul className="character-detail__comics-list">
-              {selectedCharacter.comics.count &&
-                selectedCharacter.comics.titles.map((comicTitle, index) => (
+              {selectedCharacterComics.pagination.elements &&
+                selectedCharacterComics.data.map((comic, index) => (
                   <li
-                    key={`${comicTitle}-${index}`}
+                    key={`${comic.id}-${index}`}
                     className="character-detail__comic-item"
                   >
-                    {comicTitle}
+                    {comic.title}
                   </li>
                 ))}
             </ul>
