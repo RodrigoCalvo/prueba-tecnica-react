@@ -26,17 +26,14 @@ export const CharactersListItem = ({
     navigate(`/character/${character.id}`);
   }, [character, navigate, setSelectedCharacter]);
 
-  const handleLikeClick = useCallback(
-    (ev: SyntheticEvent) => {
-      ev.stopPropagation();
-      if (isLiked) {
-        unlikeCharacter(loginState.user!.id, character.id);
-      } else {
-        likeCharacter(loginState.user!.id, character.id);
-      }
-    },
-    [character, isLiked, loginState, likeCharacter, unlikeCharacter]
-  );
+  const handleLikeClick = (ev: SyntheticEvent) => {
+    ev.stopPropagation();
+    if (isLiked) {
+      unlikeCharacter(loginState.user!.id, character.id);
+    } else {
+      likeCharacter(loginState.user!.id, character.id);
+    }
+  };
 
   return (
     <li className="character-list-item">
