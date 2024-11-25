@@ -1,4 +1,6 @@
 export const API_BASE_URL = 'http://localhost:3200/';
+export const MARVEL_CHAR_ID_LENGHT = 7;
+export const JSON_HEADER = { 'Content-Type': 'application/json' };
 
 type Endpoint = {
   method: string;
