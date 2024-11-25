@@ -4,8 +4,8 @@ export type CharacterVM = {
   description: string;
   image: string;
   comics: {
-    count: { total: number; displayed: number };
-    titles: Array<string>;
+    total: number;
+    displayed: number;
   };
   comments: Array<Comment>;
   ratings: Array<Rating>;

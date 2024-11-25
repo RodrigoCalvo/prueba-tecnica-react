@@ -1,4 +1,4 @@
-import { CharactersListVM, CharacterVM } from './characters';
+import { CharactersListVM, CharacterVM, ComicsListVM } from './characters';
 import { User } from './users';
 
 export type AppStatusInitialStateVM = {
@@ -14,4 +14,5 @@ export type AppStatusInitialStateVM = {
 export type CharactersInitalStateVM = {
   charactersList: CharactersListVM;
   selectedCharacter: CharacterVM;
+  selectedCharacterComics: ComicsListVM;
 };
