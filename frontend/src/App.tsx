@@ -4,6 +4,7 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { Character } from "./pages/character";
 import { LoginValidate } from "./modules/login-validate/login-validate";
+import { ScrollToTop } from "./utils/scroll-to-top";
 
 function App() {
   const routerOptions: Array<{ path: string; label: string; page: any }> = [
@@ -28,11 +29,14 @@ function App() {
     },
   ];
   return (
-    <Routes>
-      {routerOptions.map((item) => (
-        <Route key={item.label} path={item.path} element={item.page}></Route>
-      ))}
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        {routerOptions.map((item) => (
+          <Route key={item.label} path={item.path} element={item.page}></Route>
+        ))}
+      </Routes>
+    </>
   );
 }
 
