@@ -17,14 +17,20 @@ const initialState: CharactersInitalStateVM = {
     description: '',
     image: '',
     comics: {
-      count: {
-        total: 0,
-        displayed: 0,
-      },
-      titles: [],
+      total: 0,
+      displayed: 0,
     },
     comments: [],
     ratings: [],
+  },
+  selectedCharacterComics: {
+    attributionText: '',
+    data: [],
+    pagination: {
+      elements: 0,
+      page: 0,
+      totalPages: 0,
+    },
   },
 };
 
