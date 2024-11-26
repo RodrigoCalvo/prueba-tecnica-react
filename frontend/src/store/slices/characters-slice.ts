@@ -76,6 +76,7 @@ export const charactersSlice = createSlice({
       if (character) {
         character.comments?.push(addedComment);
       }
+      state.selectedCharacter.comments?.push(addedComment);
     },
     deleteCharacterComment: (
       state,
@@ -95,6 +96,10 @@ export const charactersSlice = createSlice({
           (comment) => comment.id !== commentId
         );
       }
+      state.selectedCharacter.comments =
+        state.selectedCharacter.comments.filter(
+          (comment) => comment.id !== commentId
+        );
     },
     addCharacterRating: (
       state,
@@ -112,6 +117,7 @@ export const charactersSlice = createSlice({
       if (character) {
         character.ratings?.push(addedRating);
       }
+      state.selectedCharacter.ratings?.push(addedRating);
     },
     changeCharacterRating: (
       state,
@@ -133,6 +139,13 @@ export const charactersSlice = createSlice({
         if (ratingIndex !== -1) {
           character.ratings[ratingIndex] = changedRating;
         }
+      }
+      const selectedCharRatingIndex = state.selectedCharacter.ratings.findIndex(
+        (rating) => rating.user === changedRating.user
+      );
+      if (selectedCharRatingIndex !== -1) {
+        state.selectedCharacter.ratings[selectedCharRatingIndex] =
+          changedRating;
       }
     },
   },
