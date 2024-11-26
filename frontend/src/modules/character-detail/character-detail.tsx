@@ -5,6 +5,7 @@ import { StarRating } from "./components/star-rating";
 import { ImagesGallery } from "./components/images-gallery";
 import { CommentsList } from "./components/comments-list";
 import { CommentTextbox } from "./components/comment-textbox";
+import { Comment, Rating } from "../../models/characters";
 
 export const CharacterDetail = () => {
   const {
@@ -14,36 +15,77 @@ export const CharacterDetail = () => {
     loginState,
     likeCharacter,
     unlikeCharacter,
+    addRatingToCharacter,
+    changeRatingFromCharacter,
+    addCommentToCharacter,
   } = useController();
   const isLiked = useMemo(
     () =>
       !!loginState.user?.likedCharacters?.find(
         (char) => char.id === selectedCharacter.id
       ),
-    [selectedCharacter, loginState]
+    [selectedCharacter.id, loginState]
   );
 
-  const handleLikeClick = useCallback(() => {
+  const userRating = useMemo(() => {
+    const rating = selectedCharacter.ratings.find(
+      (rating) => rating.user === loginState.user?.name
+    );
+    return rating?.rating || 0;
+  }, [loginState, selectedCharacter.ratings]);
+
+  const averageRating = useMemo(() => {
+    const ratingsArray = selectedCharacter.ratings.map(
+      (rating) => rating.rating
+    );
+    if (ratingsArray.length) {
+      const summatory = ratingsArray.reduce((acc, current) => acc + current, 0);
+      return summatory / ratingsArray.length;
+    } else return 0;
+  }, [selectedCharacter.ratings]);
+
+  const handleLikeClick = () => {
     if (isLiked) {
       unlikeCharacter(loginState.user!.id, selectedCharacter.id);
     } else {
       likeCharacter(loginState.user!.id, selectedCharacter.id);
     }
-  }, [selectedCharacter, isLiked, loginState, likeCharacter, unlikeCharacter]);
-
-  //console.log(selectedCharacterComics);
-
-  const userRating = 2;
-  const averageRating = 5;
-  const handleStarClick = (num: number) => {
-    console.log(num);
   };
-  const handleCommentSubmit = (ev: SyntheticEvent) => {
-    ev.preventDefault();
-    const evTarget = ev.target as HTMLFormElement;
-    const textArea = evTarget.firstChild as HTMLTextAreaElement;
-    console.log(textArea.value);
-  };
+
+  const handleStarClick = useCallback(
+    (num: number) => {
+      const rating: Rating = {
+        rating: num,
+        user: loginState.user?.name ?? "Anonymous",
+      };
+      if (userRating) {
+        changeRatingFromCharacter(selectedCharacter.id, rating);
+      } else {
+        addRatingToCharacter(selectedCharacter.id, rating);
+      }
+    },
+    [
+      userRating,
+      loginState.user?.name,
+      selectedCharacter.id,
+      addRatingToCharacter,
+      changeRatingFromCharacter,
+    ]
+  );
+
+  const handleCommentSubmit = useCallback(
+    (ev: SyntheticEvent) => {
+      ev.preventDefault();
+      const evTarget = ev.target as HTMLFormElement;
+      const textArea = evTarget.firstChild as HTMLTextAreaElement;
+      const comment: Pick<Comment, "textContent" | "user"> = {
+        textContent: textArea.value,
+        user: loginState.user?.name ?? "Anonymous",
+      };
+      addCommentToCharacter(selectedCharacter.id, comment);
+    },
+    [loginState, selectedCharacter.id, addCommentToCharacter]
+  );
 
   return (
     <>
