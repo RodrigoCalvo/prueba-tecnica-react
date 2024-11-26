@@ -53,7 +53,7 @@ export class CharactersController {
 
       const { marvelData, dbData } = (await fetchCharacter(Number(id))) || {};
       if (!marvelData) throw new Error('Not data');
-      const result = singleCharacterParser(marvelData, dbData); // { attributionText: string; character: CharacterVM }
+      const result = singleCharacterParser(marvelData, dbData);
       resp.setHeader('Content-type', 'application/json');
       resp.end(JSON.stringify(result));
     } catch (error) {
