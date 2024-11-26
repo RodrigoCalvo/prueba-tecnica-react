@@ -20,7 +20,7 @@ export const CommentsList = <
                 {comment.textContent}
               </p>
               <span className="character-detail__comment-author">
-                — {comment.user || "Anónimo"}
+                — {comment.user || "Anonymous"}
               </span>
             </li>
           ))
