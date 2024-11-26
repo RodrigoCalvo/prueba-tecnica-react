@@ -115,7 +115,10 @@ export const useController = () => {
     [dispatch]
   );
   const addCommentToCharacter = useCallback(
-    async (characterId: number, comment: Comment) => {
+    async (
+      characterId: number,
+      comment: Pick<Comment, 'textContent' | 'user'>
+    ) => {
       addComment(characterId, comment).then((addedComment) => {
         if (addedComment) {
           dispatch(addCharacterComment({ characterId, addedComment }));
