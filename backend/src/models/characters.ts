@@ -8,13 +8,30 @@ export type CharactersListVM = {
   };
 };
 
+export type Comment = {
+  id: string;
+  textContent: string;
+  user: string;
+};
+
+export type Rating = {
+  rating: number;
+  user: string;
+};
+
 export type CharacterVM = {
   id: number;
   name: string;
   description: string;
   image: string;
   comics: {
-    count: { total: number; displayed: number };
-    titles: Array<string>;
+    total: number;
+    displayed: number;
   };
+} & CharacterDbVM;
+
+export type CharacterDbVM = {
+  id: number;
+  comments: Array<Comment>;
+  ratings: Array<Rating>;
 };

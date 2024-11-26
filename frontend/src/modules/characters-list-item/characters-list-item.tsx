@@ -1,3 +1,4 @@
+import { SyntheticEvent, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CharacterVM } from "../../models/characters";
 import "./characters-list-item.css";
@@ -8,12 +9,30 @@ export const CharactersListItem = ({
 }: {
   character: CharacterVM;
 }) => {
-  const { setSelectedCharacter } = useController();
+  const { loginState, likeCharacter, unlikeCharacter, setSelectedCharacter } =
+    useController();
   const navigate = useNavigate();
 
-  const handleItemClick = () => {
-    setSelectedCharacter(character);
+  const isLiked = useMemo(
+    () =>
+      !!loginState.user?.likedCharacters?.find(
+        (char) => char.id === character.id
+      ),
+    [character, loginState]
+  );
+
+  const handleItemClick = useCallback(() => {
+    setSelectedCharacter(character.id);
     navigate(`/character/${character.id}`);
+  }, [character, navigate, setSelectedCharacter]);
+
+  const handleLikeClick = (ev: SyntheticEvent) => {
+    ev.stopPropagation();
+    if (isLiked) {
+      unlikeCharacter(loginState.user!.id, character.id);
+    } else {
+      likeCharacter(loginState.user!.id, character.id);
+    }
   };
 
   return (
@@ -29,7 +48,18 @@ export const CharactersListItem = ({
         <div className="character-list-item__details">
           <span className="character-list-item__name">{character.name}</span>
           <span className="character-list-item__comics-count">
-            {character.comics.count.total} cómics
+            {character.comics.total} cómics
+          </span>
+        </div>
+        <div className="character-list-item__favorite">
+          <span
+            role="button"
+            onClick={handleLikeClick}
+            className={`character-list-item__heart ${
+              isLiked ? "favorite" : ""
+            }`}
+          >
+            ♥
           </span>
         </div>
       </span>

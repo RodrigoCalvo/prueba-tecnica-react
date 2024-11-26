@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const LoginScreen = () => {
   const { login } = useController();
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("Paso abierto para pruebas"); // Pruebas
+  const [userName, setUserName] = useState("");
 
   const handleInput = (event: SyntheticEvent<HTMLInputElement>) => {
     const evTarget = event.target as HTMLInputElement;

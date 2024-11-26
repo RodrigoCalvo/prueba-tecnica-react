@@ -52,6 +52,32 @@
   color: #aaaaaa;
 }
 
+.character-list-item__favorite {
+  margin-left: auto;
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-list-item__heart {
+  font-size: 20px;
+  color: transparent;
+  text-shadow: 0 0 0 #aaaaaa;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.character-list-item__heart.favorite {
+  color: #ff1e1e;
+  text-shadow: none;
+  transform: scale(1.2);
+}
+
+.character-list-item__favorite:hover .character-list-item__heart {
+  transform: scale(1.4);
+  color: #ff4949;
+}
+
 @media (max-width: 600px) {
   .character-list-item__thumbnail {
     width: 50px;

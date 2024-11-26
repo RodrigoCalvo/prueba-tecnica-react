@@ -1,0 +1,13 @@
+[
+  {
+    "id": 111111,
+    "comments": [
+      {
+        "id": "785783",
+        "textContent": "Esto es otro comentario",
+        "user": "User1"
+      }
+    ],
+    "ratings": [{ "rating": 7, "user": "User1" }]
+  }
+]

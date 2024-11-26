@@ -1,0 +1,8 @@
+[
+  { "name": "User1" },
+  {
+    "id": "U294656",
+    "name": "testUser",
+    "likedCharacters": [{ "id": 1011334 }]
+  }
+]

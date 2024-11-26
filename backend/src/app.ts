@@ -3,14 +3,17 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config();
 
-import { charactersRouter } from './routers/characters-router';
+import { characterRouter, charactersRouter } from './routers/characters-router';
+import { usersRouter } from './routers/users-router';
 
 export const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-app.use('/marvel', charactersRouter);
+app.use('/characters', charactersRouter);
+app.use('/character', characterRouter);
+app.use('/users', usersRouter);
 app.get('/', (req: Request, res: Response) => {
   res.send(`
         <!DOCTYPE html>
@@ -31,28 +34,4 @@ app.get('/', (req: Request, res: Response) => {
         </body>
         </html>
     `);
-});
-
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-  req;
-  next;
-  let status: number;
-  switch (error.name) {
-    case 'ValidationError':
-      status = 406;
-      break;
-    case 'URIError':
-      status = 400;
-      break;
-    case 'ReferenceError':
-      status = 404;
-      break;
-    case 'RangeError':
-      status = 416;
-      break;
-    default:
-      status = 500;
-  }
-  res.status(status);
-  res.end(JSON.stringify({ type: error.name, message: error.message }));
 });

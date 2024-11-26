@@ -1,9 +1,10 @@
-import { CharactersListVM, CharacterVM } from './characters';
+import { CharactersListVM, CharacterVM, ComicsListVM } from './characters';
+import { User } from './users';
 
 export type AppStatusInitialStateVM = {
   loginState: {
     logged: boolean;
-    user: string;
+    user: User | null;
   };
   selectedPage: number;
   isLoading: boolean;
@@ -13,4 +14,5 @@ export type AppStatusInitialStateVM = {
 export type CharactersInitalStateVM = {
   charactersList: CharactersListVM;
   selectedCharacter: CharacterVM;
+  selectedCharacterComics: ComicsListVM;
 };

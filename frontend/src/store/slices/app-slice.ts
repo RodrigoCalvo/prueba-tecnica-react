@@ -4,7 +4,7 @@ import { AppStatusInitialStateVM } from '../../models/initial-state';
 const initialState: AppStatusInitialStateVM = {
   loginState: {
     logged: false,
-    user: '',
+    user: null,
   },
   selectedPage: 0,
   isLoading: false,
@@ -20,6 +20,34 @@ export const appSlice = createSlice({
       { payload }: PayloadAction<AppStatusInitialStateVM['loginState']>
     ) => {
       state.loginState = payload;
+    },
+    addUserLike: (
+      state,
+      {
+        payload,
+      }: PayloadAction<
+        NonNullable<
+          AppStatusInitialStateVM['loginState']['user']
+        >['likedCharacters'][number]
+      >
+    ) => {
+      state.loginState.user?.likedCharacters.push(payload);
+    },
+    removeUserLike: (
+      state,
+      {
+        payload,
+      }: PayloadAction<
+        NonNullable<
+          AppStatusInitialStateVM['loginState']['user']
+        >['likedCharacters'][number]
+      >
+    ) => {
+      if (state.loginState.user)
+        state.loginState.user.likedCharacters =
+          state.loginState.user.likedCharacters.filter(
+            (character) => character.id !== payload.id
+          );
     },
     setSelectedPage: (
       state,
@@ -42,7 +70,13 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setLoginData, setSelectedPage, setLoading, setError } =
-  appSlice.actions;
+export const {
+  setLoginData,
+  addUserLike,
+  removeUserLike,
+  setSelectedPage,
+  setLoading,
+  setError,
+} = appSlice.actions;
 
 export default appSlice.reducer;

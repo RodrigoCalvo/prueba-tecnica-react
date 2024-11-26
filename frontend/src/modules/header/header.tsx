@@ -18,7 +18,7 @@ export const Header = () => {
       </h1>
       <div className="header__user-actions">
         <p className="header__welcome-message">
-          Bienvenida/o, {loginState.user}
+          Bienvenida/o, {loginState.user?.name}
         </p>
         <button className="header__logout-button" onClick={handleLogoutClick}>
           Logout
