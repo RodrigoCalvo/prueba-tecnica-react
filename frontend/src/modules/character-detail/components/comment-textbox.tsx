@@ -1,4 +1,4 @@
-import { FormEventHandler, SyntheticEvent, useState } from "react";
+import { FormEvent, FormEventHandler, SyntheticEvent, useState } from "react";
 
 export const CommentTextbox = ({
   placeholder,
@@ -15,9 +15,18 @@ export const CommentTextbox = ({
     const evTarget = ev.target as HTMLTextAreaElement;
     setNewComment(evTarget.value);
   };
+  const handleSubmitButtonClick = (ev: FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    handleSubmit(ev);
+    setNewComment("");
+  };
+
   return (
     <>
-      <form className="character-detail__comment-form" onSubmit={handleSubmit}>
+      <form
+        className="character-detail__comment-form"
+        onSubmit={handleSubmitButtonClick}
+      >
         <textarea
           className="character-detail__comment-input"
           placeholder={placeholder}
